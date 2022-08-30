@@ -1,9 +1,16 @@
 Table of Contents
 =================
 
+* [Table of Contents](#table-of-contents)
 * [how-to-import-ocp-cluster-add-worker-ai](#how-to-import-ocp-cluster-add-worker-ai)
    * [Purpose](#purpose)
    * [Pre-requites](#pre-requites)
+      * [latest aicli tool](#latest-aicli-tool)
+      * [An Offline Assisted-Installer](#an-offline-assisted-installer)
+      * [An Existed/Running OCP Cluster(SNO or Compact Cluster)](#an-existedrunning-ocp-clustersno-or-compact-cluster)
+      * [An Offline Token that can get from here](#an-offline-token-that-can-get-from-here)
+      * [A Public SSH-Key for core user ssh](#a-public-ssh-key-for-core-user-ssh)
+      * [A Pull Secret for Image](#a-pull-secret-for-image)
    * [Prepare to import Openshift Cluster](#prepare-to-import-openshift-cluster)
       * [Prepare the deployment by setting the environment variables](#prepare-the-deployment-by-setting-the-environment-variables)
          * [Setup aicli alias](#setup-aicli-alias)
@@ -12,7 +19,7 @@ Table of Contents
          * [Offline Token](#offline-token)
          * [JWT Token](#jwt-token)
          * [Set ENV for Cluster Name, Base-domain and Existed OCP Cluster-ID](#set-env-for-cluster-name-base-domain-and-existed-ocp-cluster-id)
-      * [Start Import Openshift Cluster](#start-import-openshift-cluster)
+         * [Start Import Openshift Cluster](#start-import-openshift-cluster)
       * [Prepare to create InfraENV CFG](#prepare-to-create-infraenv-cfg)
          * [Set Environment for New Cluster-ID](#set-environment-for-new-cluster-id)
          * [Setup/Prepare InfraENV Json for new worker host](#setupprepare-infraenv-json-for-new-worker-host)
@@ -137,8 +144,8 @@ curl -X POST "$API_URL/api/assisted-install/v2/infra-envs" -H "accept: applicati
    "user_name":"admin"
 }
 ```
-### Prepare to generate ISO file for new worker node
-#### Prepare NMState static configuration for new host
+## Prepare to generate ISO file for new worker node
+### Prepare NMState static configuration for new host
 ```yaml
 static_network_config:
 - interfaces:
@@ -162,28 +169,28 @@ static_network_config:
       next-hop-address: 192.168.24.1
       next-hop-interface: eno1
 ```
-#### Create ISO File Using aicli with static_config
+### Create ISO File Using aicli with static_config
 ```
 aicli create iso -m --paramfile noknom-aicli-worker-1.yaml noknom-aicli
 Getting Iso url for infraenv noknom-aicli
 http://192.168.24.80:8888/images/df3d5eb2-c1b8-4692-be70-d529c2bb28d1?arch=x86_64&type=minimal-iso&version=4.10
 ```
-#### Download ISO file 
+### Download ISO file 
 ```
 aicli download iso -p ./ noknom-aicli
 Downloading Iso for infraenv noknom-aicli in ./
 ```
-#### Copy ISO file to your laptop and boot 
+### Copy ISO file to your laptop and boot 
 - Copy to ISO to your laptop
 - set boot order to Virtual-CD/DVD and Checked
 - Attach ISO file to virtual-connect
 
-#### Observe the boot activities from iLO or Bios-Console
+### Observe the boot activities from iLO or Bios-Console
 - It will be at least 2-3 reboot after seen ostree-0 and ostrees-1 
 - After First Reboot, new host is already discovered
 - Cluster View-Events to watch for any dns issue if new is not in Ready State
 
-#### Start the new host/worker node Installation
+### Start the new host/worker node Installation
 - Once new host is discovered, it can be started using aicli or AI GUI button
 ```
 aicli list host
@@ -203,7 +210,7 @@ aicli list host
 | worker-1.noknom-aicli.hubcluster-1.lab.eng.cert.redhat.com | e0d004d2-a73f-470a-287e-d90ddcc2a4a3 | noknom-aicli | noknom-aicli | installing-in-progress | worker | 192.168.24.90 |
 +------------------------------------------------------------+--------------------------------------+--------------+--------------+----------------------
 ```
-#### Approve CSR for new worker/host to join existing OpenShift Cluster
+### Approve CSR for new worker/host to join existing OpenShift Cluster
 ```
 oc get csr -A
 NAME        AGE   SIGNERNAME                                    REQUESTOR                                                                   REQUESTEDDURATION   CONDITION
@@ -215,7 +222,7 @@ oc get csr -o name | xargs oc adm certificate approve
 certificatesigningrequest.certificates.k8s.io/csr-9tjfz approved
 certificatesigningrequest.certificates.k8s.io/csr-w2vzj approved
 ```
-#### Check new worker/host status
+### Check new worker/host status
 <details>
  <summary><b>Click Here to see sos report usage</b></summary>
 
@@ -289,7 +296,7 @@ noknom-aicli   true           https://api.noknom-aicli.hubcluster-1.lab.eng.cert
 ```
 </details>
 
-#### Assisted-Installed GUI Status
+### Assisted-Installed GUI Status
 - As you can see the Installed status is unchecked-green but that is how it works for now.  
   All the existed cluster and new host's components are healthy!
 ![New Host Status](img/ai-status.png)
