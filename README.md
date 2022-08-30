@@ -35,7 +35,9 @@ The idea is to show how to import an OpenShift Running Cluster to new Assisted-I
 The  of this repo is to show how to import an Openshift cluster to Offline/Standard-alone Assisted-Installer using REST API (curl) to AI.
 Once OCP Cluster is successfully imported to AI, then prepare and add a new worker node to it using aicli.
 
-When the node boots with that ISO, the node automatically reaches out to the existing cluster, the result it causes two CertificateSigningRequests (CSRs) to be sent from the new node to the existing cluster. A CSR is simply a request to obtain the client certificates for the (existing) cluster. You'll need to explicitly approve these requests. Once approved, the existing cluster provides the client certificates to the new node, and the new node is allowed to join the existing cluster. From AI GUI status, it only shows new worker host but not the imported cluster, and green checked wont be possible at current AI version (installed status). With oc cmd all old and new hosts are visible as normally.
+When the node boots with that ISO, the node automatically reaches out to the existing cluster, the result it causes two CertificateSigningRequests (CSRs) to be sent from the new node to the existing cluster. A CSR is simply a request to obtain the client certificates for the (existing) cluster. You'll need to explicitly approve these requests. Once approved, the existing cluster provides the client certificates to the new node, and the new node is allowed to join the existing cluster. 
+
+From AI GUI status, it only shows new worker host but not the imported cluster, and green checked wont be possible at current AI version (installed status). With oc cmd all old and new hosts are visible as normally.
   
 **Note**: using aicli to prepare and set static IP for new worker node
 
@@ -52,11 +54,11 @@ Container's way:
 alias aicli='sudo podman run --rm -e AI_URL=${AI_URL_EP} -e AI_OFFLINETOKEN=${TOKEN} -v ${HOME}/.ssh/:/root/.ssh/:Z -v $HOME/noknom-aicli/:/root/.aicli:Z -v ${HOME}/noknom-aicli/:/workdir:Z quay.io/karmab/aicli:latest'
 ```
 - **An Offline Assisted-Installer**
-- **An Existed/Running OCP Cluster(SNO or Compact Cluster)**
-- **An Offline Token that can get from here**  
+- **Either Existed/Running OCP Cluster(SNO or Compact Cluster)**
+- **Offline Token that can get from here**  
     https://console.redhat.com/openshift/token/show#
-- **A Public SSH-Key for core user ssh**
-- **A Pull Secret for Image**  
+- **Public SSH-Key for core user ssh**
+- ** Image Pull Secret**  
   https://console.redhat.com/openshift/install/pull-secret
   
 ## Prepare to import Openshift Cluster
