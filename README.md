@@ -61,6 +61,7 @@ alias aicli='sudo podman run --rm -e AI_URL=${AI_URL_EP} -e AI_OFFLINETOKEN=${TO
 - ** Image Pull Secret**  
   https://console.redhat.com/openshift/install/pull-secret
   
+  
 ## Prepare to import Openshift Cluster
 ### Prepare the deployment by setting the environment variables
 #### Setup aicli alias 
