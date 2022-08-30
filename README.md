@@ -186,6 +186,9 @@ certificatesigningrequest.certificates.k8s.io/csr-9tjfz approved
 certificatesigningrequest.certificates.k8s.io/csr-w2vzj approved
 ```
 #### Check new worker/host status
+<details>
+ <summary><b>Click Here to see sos report usage</b></summary>
+
 ```
 oc get no 
 NAME                                                         STATUS   ROLES           AGE     VERSION
@@ -254,5 +257,9 @@ oc get mcv
 NAME           HUB ACCEPTED   MANAGED CLUSTER URLS                                                 JOINED   AVAILABLE   AGE
 noknom-aicli   true           https://api.noknom-aicli.hubcluster-1.lab.eng.cert.redhat.com:6443   True     True        3d18h
 ```
+</details>
+
 #### Assisted-Installed GUI Status
+- As you can see the Installed status is unchecked-green but that is how it works for now.  
+  All the existed cluster and new host's components are healthy!
 ![New Host Status](img/ai-status.png)
