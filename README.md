@@ -254,3 +254,5 @@ oc get mcv
 NAME           HUB ACCEPTED   MANAGED CLUSTER URLS                                                 JOINED   AVAILABLE   AGE
 noknom-aicli   true           https://api.noknom-aicli.hubcluster-1.lab.eng.cert.redhat.com:6443   True     True        3d18h
 ```
+#### Assisted-Installed GUI Status
+![New Host Status](img/ai-status.png)
