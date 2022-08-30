@@ -47,7 +47,7 @@ When the node boots with that ISO, the node automatically reaches out to the exi
 
 
 ## Pre-requites
-### latest aicli tool  
+- **latest aicli tool**  
   https://aicli.readthedocs.io/en/latest/
 ```bash
 python way:
@@ -57,12 +57,12 @@ sudo pip3 install -U assisted-service-client
 Container's way:
 alias aicli='sudo podman run --rm -e AI_URL=${AI_URL_EP} -e AI_OFFLINETOKEN=${TOKEN} -v ${HOME}/.ssh/:/root/.ssh/:Z -v $HOME/noknom-aicli/:/root/.aicli:Z -v ${HOME}/noknom-aicli/:/workdir:Z quay.io/karmab/aicli:latest'
 ```
-### An Offline Assisted-Installer
-### An Existed/Running OCP Cluster(SNO or Compact Cluster)
-### An Offline Token that can get from here  
+- **An Offline Assisted-Installer**
+- **An Existed/Running OCP Cluster(SNO or Compact Cluster)**
+- **An Offline Token that can get from here**  
     https://console.redhat.com/openshift/token/show#
-### A Public SSH-Key for core user ssh
-### A Pull Secret for Image  
+- **A Public SSH-Key for core user ssh**
+- **A Pull Secret for Image**  
   https://console.redhat.com/openshift/install/pull-secret
   
 ## Prepare to import Openshift Cluster
