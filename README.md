@@ -40,7 +40,7 @@ When the node boots with that ISO, the node automatically reaches out to the exi
 
 
 ## Pre-requites
-- latest aicli tool  
+### latest aicli tool  
   https://aicli.readthedocs.io/en/latest/
 ```bash
 python way:
@@ -50,12 +50,12 @@ sudo pip3 install -U assisted-service-client
 Container's way:
 alias aicli='sudo podman run --rm -e AI_URL=${AI_URL_EP} -e AI_OFFLINETOKEN=${TOKEN} -v ${HOME}/.ssh/:/root/.ssh/:Z -v $HOME/noknom-aicli/:/root/.aicli:Z -v ${HOME}/noknom-aicli/:/workdir:Z quay.io/karmab/aicli:latest'
 ```
-- An Offline Assisted-Installer
-- An Existed/Running OCP Cluster(SNO or Compact Cluster)
-- An Offline Token that can get from here  
-  https://console.redhat.com/openshift/token/show#
-- A Public SSH-Key for core user ssh
-- A Pull Secret for Image  
+### An Offline Assisted-Installer
+### An Existed/Running OCP Cluster(SNO or Compact Cluster)
+### An Offline Token that can get from here  
+    https://console.redhat.com/openshift/token/show#
+### A Public SSH-Key for core user ssh
+### A Pull Secret for Image  
   https://console.redhat.com/openshift/install/pull-secret
   
 ## Prepare to import Openshift Cluster
@@ -86,7 +86,7 @@ export CLUSTER_NAME='noknom-aicli'
 export CLUSTER_DOMAIN='hubcluster-1.lab.eng.cert.redhat.com'
 export OS_CLUSTER_ID=$(oc get clusterversion -o jsonpath='{.items[].spec.clusterID}{"\n"}')
 ```
-### Start Import Openshift Cluster
+#### Start Import Openshift Cluster
 ```bash
 curl -X POST  "$API_URL/api/assisted-install/v2/clusters/import" -H "accept: application/json" -H "Content-Type: application/json" -H "Authorization: Bearer $TOKEN" -d "{\"name\":\"$CLUSTER_NAME\",\"openshift_cluster_id\":\"$OS_CLUSTER_ID\",\"api_vip_dnsname\":\"api.$CLUSTER_NAME.$CLUSTER_DOMAIN\"}"
 ```
