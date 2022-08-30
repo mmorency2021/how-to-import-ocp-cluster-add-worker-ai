@@ -1,3 +1,33 @@
+Table of Contents
+=================
+
+* [how-to-import-ocp-cluster-add-worker-ai](#how-to-import-ocp-cluster-add-worker-ai)
+   * [Purpose](#purpose)
+   * [Pre-requites](#pre-requites)
+   * [Prepare to import Openshift Cluster](#prepare-to-import-openshift-cluster)
+      * [Prepare the deployment by setting the environment variables](#prepare-the-deployment-by-setting-the-environment-variables)
+         * [Setup aicli alias](#setup-aicli-alias)
+         * [An API URL to Offline Assisted-Installer](#an-api-url-to-offline-assisted-installer)
+         * [Image Pull Secret](#image-pull-secret)
+         * [Offline Token](#offline-token)
+         * [JWT Token](#jwt-token)
+         * [Set ENV for Cluster Name, Base-domain and Existed OCP Cluster-ID](#set-env-for-cluster-name-base-domain-and-existed-ocp-cluster-id)
+      * [Start Import Openshift Cluster](#start-import-openshift-cluster)
+      * [Prepare to create InfraENV CFG](#prepare-to-create-infraenv-cfg)
+         * [Set Environment for New Cluster-ID](#set-environment-for-new-cluster-id)
+         * [Setup/Prepare InfraENV Json for new worker host](#setupprepare-infraenv-json-for-new-worker-host)
+         * [Start Create InfraEnv](#start-create-infraenv)
+      * [Prepare to generate ISO file for new worker node](#prepare-to-generate-iso-file-for-new-worker-node)
+         * [Prepare NMState static configuration for new host](#prepare-nmstate-static-configuration-for-new-host)
+         * [Create ISO File Using aicli with static_config](#create-iso-file-using-aicli-with-static_config)
+         * [Download ISO file](#download-iso-file)
+         * [Copy ISO file to your laptop and boot](#copy-iso-file-to-your-laptop-and-boot)
+         * [Observe the boot activities from iLO or Bios-Console](#observe-the-boot-activities-from-ilo-or-bios-console)
+         * [Start the new host/worker node Installation](#start-the-new-hostworker-node-installation)
+         * [Approve CSR for new worker/host to join existing OpenShift Cluster](#approve-csr-for-new-workerhost-to-join-existing-openshift-cluster)
+         * [Check new worker/host status](#check-new-workerhost-status)
+         * [Assisted-Installed GUI Status](#assisted-installed-gui-status)
+  
 # how-to-import-ocp-cluster-add-worker-ai
 The idea is to show how to import an OpenShift Running Cluster to new Assisted-Installer then add a worker node to this imported cluster
 ## Purpose
