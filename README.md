@@ -218,7 +218,7 @@ certificatesigningrequest.certificates.k8s.io/csr-w2vzj approved
 ```
 ### Check new worker/host status
 <details>
- <summary><b>Click Here to see sos report usage</b></summary>
+ <summary><b>Click Here to see overall Cluster and New worker host Status</b></summary>
 
 ```
 oc get no 
